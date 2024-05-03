@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class ProductController
 {
@@ -12,7 +13,10 @@ class ProductController
      */
     public function index()
     {
-        //
+        $products = Product::query()
+            ->latest()
+            ->paginate();
+        return view('dashboard.products.index', compact('products'));
     }
 
     /**
@@ -20,6 +24,7 @@ class ProductController
      */
     public function create()
     {
+        return view('dashboard.products.create');
     }
 
     /**
@@ -31,16 +36,17 @@ class ProductController
             'title' => ['required', 'max:255'],
             'description' => 'required',
             'price' => ['required', 'numeric', 'max:999999.99'],
+            'images' => ['required', 'array', 'max:5'],
+            'images.*' => ['image', 'mimes:jpeg,png,jpg', 'max:2048'],
         ]);
-        
         $product = Product::create($data);
 
-        if ($request->has('images')) {
-            $images = $request->file('images');
-            foreach ($images as $image) {
-                $product->addMedia($image)->toMediaCollection('product_images');
-            }
+        $images = $request->file('images');
+        foreach ($images as $image) {
+            $product->addMedia($image)->toMediaCollection('product_images');
         }
+
+        return to_route('dashboard.products.index');
     }
 
 
@@ -63,8 +69,15 @@ class ProductController
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Product $product)
     {
-        //
+
+        $product->getMedia('product_images')->each(function (Media $media) {
+            $media->delete();
+        });
+
+        $product->delete();
+
+        return to_route('dashboard.products.index');
     }
 }
