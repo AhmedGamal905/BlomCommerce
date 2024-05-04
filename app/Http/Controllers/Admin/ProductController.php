@@ -8,9 +8,6 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class ProductController
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $products = Product::query()
@@ -19,17 +16,12 @@ class ProductController
         return view('dashboard.products.index', compact('products'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+
     public function create()
     {
         return view('dashboard.products.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $data = $request->validate([
@@ -49,29 +41,48 @@ class ProductController
         return to_route('dashboard.products.index');
     }
 
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function edit(Product $product)
     {
-        //
+        return view('dashboard.products.update', compact('product'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+
+    public function update(Request $request, Product $product)
     {
-        //
+        $data = $request->validate([
+            'title' => ['required', 'max:255'],
+            'description' => 'required',
+            'price' => ['required', 'numeric', 'max:999999.99'],
+            'images.*' => ['image', 'mimes:jpeg,png,jpg', 'max:2048'],
+        ]);
+        $totalImagesAfterUpdate = $product->getMedia('product_images')->count() -
+            count($request->input('delete_images', [])) +
+            ($request->hasFile('new_images') ? count($request->file('new_images')) : 0);
+
+        if ($totalImagesAfterUpdate > 5) {
+            return back()->withErrors(['images' => 'The total number of images after update must not exceed 5.']);
+        }
+
+        if (isset($request->delete_images)) {
+            $product->getMedia('product_images')->whereIn('id', $request->delete_images)->each(function ($media) {
+                $media->delete();
+            });
+        }
+
+        if ($request->hasFile('new_images')) {
+            $images = $request->file('new_images');
+            foreach ($images as $image) {
+                $product->addMedia($image)->toMediaCollection('product_images');
+            }
+        }
+
+        $product->update($data);
+
+        return to_route('dashboard.products.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Product $product)
     {
-
         $product->getMedia('product_images')->each(function (Media $media) {
             $media->delete();
         });

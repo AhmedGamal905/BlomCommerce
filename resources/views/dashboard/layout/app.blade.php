@@ -112,7 +112,7 @@
                                                 </a>
                                                 <!-- more inner pages-->
                                             </li>
-                                            <li class="nav-item"><a class="nav-link active" href="{{ route('dashboard.products.create') }}">
+                                            <li class="nav-item"><a class="nav-link " href="{{ route('dashboard.products.create') }}">
                                                     <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Add product</span>
                                                     </div>
                                                 </a>

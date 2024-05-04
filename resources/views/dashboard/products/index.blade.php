@@ -30,9 +30,13 @@
                 <td class="align-middle">{{ $product->title }}</td>
                 <td class="align-middle">${{ $product->price }}</td>
                 <td class="align-middle">{{ $product->created_at->format('j M Y, g:i a') }}</td>
+
                 <td class="align-middle">
-                    <button class="btn btn-outline-warning me-1 mb-1" type="button">Update</button>
+                    <form method="GET" action="{{ route('dashboard.products.edit', $product->id) }}">
+                        <button class="btn btn-outline-warning me-1 mb-1" type="submit">Update</button>
+                    </form>
                 </td>
+
                 <td class="align-middle white-space-nowrap text-end pe-3">
                     <form method="POST" action="{{ route('dashboard.products.destroy', $product) }}">
                         @csrf
