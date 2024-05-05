@@ -8,6 +8,7 @@
                 <th class="white-space-nowrap"></th>
                 <th class="text-black dark__text-white align-middle">ID</th>
                 <th class="text-black dark__text-white align-middle">Image</th>
+                <th class="text-black dark__text-white align-middle">Category</th>
                 <th class="text-black dark__text-white align-middle">Title</th>
                 <th class="text-black dark__text-white align-middle">Price</th>
                 <th class="text-black dark__text-white align-middle">Created At</th>
@@ -27,6 +28,7 @@
                     No image available
                     @endif
                 </td>
+                <td class="align-middle">{{ $product->category_id }}</td>
                 <td class="align-middle">{{ $product->title }}</td>
                 <td class="align-middle">${{ $product->price }}</td>
                 <td class="align-middle">{{ $product->created_at->format('j M Y, g:i a') }}</td>

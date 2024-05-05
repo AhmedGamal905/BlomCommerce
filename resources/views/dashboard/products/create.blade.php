@@ -58,8 +58,27 @@
                 </div>
             </div>
         </div>
+        <div class="col-lg-4 ps-lg-2">
+            <div class="sticky-sidebar">
+                <div class="card mb-3">
+                    <div class="card-header bg-body-tertiary">
+                        <h6 class="mb-0">Select category:</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="row gx-2">
+                            <div class="col-12 mb-3">
+                                <select class="form-select" id="product-category" name="product-category">
+                                    <option value="computerAccessories">Computer & Accessories</option>
+                                    <option>Class, Training, or Workshop</option>
+                                    <option>Concert or Performance</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-
     <div class="card mt-3">
         <div class="card-body">
             <div class="row justify-content-between align-items-center">

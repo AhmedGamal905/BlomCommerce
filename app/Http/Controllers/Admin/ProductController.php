@@ -33,8 +33,7 @@ class ProductController
         ]);
         $product = Product::create($data);
 
-        $images = $request->file('images');
-        foreach ($images as $image) {
+        foreach ($request->file('images') as $image) {
             $product->addMedia($image)->toMediaCollection('product_images');
         }
 
@@ -55,11 +54,11 @@ class ProductController
             'price' => ['required', 'numeric', 'max:999999.99'],
             'images.*' => ['image', 'mimes:jpeg,png,jpg', 'max:2048'],
         ]);
-        $totalImagesAfterUpdate = $product->getMedia('product_images')->count() -
+        $afterUpdateCount = $product->getMedia('product_images')->count() -
             count($request->input('delete_images', [])) +
             ($request->hasFile('new_images') ? count($request->file('new_images')) : 0);
 
-        if ($totalImagesAfterUpdate > 5) {
+        if ($afterUpdateCount > 5) {
             return back()->withErrors(['images' => 'The total number of images after update must not exceed 5.']);
         }
 

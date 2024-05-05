@@ -10,7 +10,6 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 class Product extends Model implements HasMedia
 {
     use HasFactory, InteractsWithMedia;
-
     protected $fillable = [
         'title',
         'price',
@@ -22,5 +21,10 @@ class Product extends Model implements HasMedia
     public function registerMediaCollections(): void
     {
         $this->addMediaCollection('product_images');
+    }
+
+    public function categories()
+    {
+        return $this->belongsTo(Category::class);
     }
 }

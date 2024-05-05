@@ -95,28 +95,30 @@
                     <div class="navbar-vertical-content scrollbar">
                         <ul class="navbar-nav flex-column mb-3" id="navbarVerticalNav">
                             <li class="nav-item">
-                                <!-- parent pages--><a class="nav-link dropdown-indicator" href="#e-commerce" role="button" data-bs-toggle="collapse" aria-expanded="true" aria-controls="e-commerce">
+                                <a class="nav-link dropdown-indicator" href="#e-commerce" role="button" data-bs-toggle="collapse" aria-expanded="true" aria-controls="e-commerce">
                                     <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-shopping-cart"></span></span><span class="nav-link-text ps-1">E commerce</span>
                                     </div>
                                 </a>
                                 <ul class="nav collapse show" id="e-commerce">
                                     <li class="nav-item"><a class="nav-link dropdown-indicator" href="#product" data-bs-toggle="collapse" aria-expanded="true" aria-controls="e-commerce">
-                                            <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Product</span>
+                                            <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Product options</span>
                                             </div>
                                         </a>
-                                        <!-- more inner pages-->
                                         <ul class="nav collapse show" id="product">
+                                            <li class="nav-item"><a class="nav-link" href="{{ route('dashboard.categories.index') }}">
+                                                    <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Categories</span>
+                                                    </div>
+                                                </a>
+                                            </li>
                                             <li class="nav-item"><a class="nav-link" href="{{ route('dashboard.products.index') }}">
                                                     <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Product list</span>
                                                     </div>
                                                 </a>
-                                                <!-- more inner pages-->
                                             </li>
                                             <li class="nav-item"><a class="nav-link " href="{{ route('dashboard.products.create') }}">
                                                     <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Add product</span>
                                                     </div>
                                                 </a>
-                                                <!-- more inner pages-->
                                             </li>
                                         </ul>
                                     </li>
@@ -124,19 +126,16 @@
                                             <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Orders</span>
                                             </div>
                                         </a>
-                                        <!-- more inner pages-->
                                         <ul class="nav collapse" id="orders">
                                             <li class="nav-item"><a class="nav-link" href="{{ asset('dashboard/public/app/e-commerce/orders/order-list.html') }}">
                                                     <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Order list</span>
                                                     </div>
                                                 </a>
-                                                <!-- more inner pages-->
                                             </li>
                                             <li class="nav-item"><a class="nav-link" href="{{ asset('dashboard/public/app/e-commerce/orders/order-details.html') }}">
                                                     <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Order details</span>
                                                     </div>
                                                 </a>
-                                                <!-- more inner pages-->
                                             </li>
                                         </ul>
                                     </li>
@@ -144,7 +143,6 @@
                                             <div class="d-flex align-items-center"><span class="nav-link-text ps-1">User</span>
                                             </div>
                                         </a>
-                                        <!-- more inner pages-->
                                     </li>
                             </li>
                         </ul>
