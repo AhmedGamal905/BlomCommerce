@@ -23,7 +23,7 @@ class Product extends Model implements HasMedia
         $this->addMediaCollection('product_images');
     }
 
-    public function categories()
+    public function category()
     {
         return $this->belongsTo(Category::class);
     }

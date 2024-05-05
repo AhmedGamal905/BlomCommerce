@@ -67,11 +67,15 @@
                     <div class="card-body">
                         <div class="row gx-2">
                             <div class="col-12 mb-3">
-                                <select class="form-select" id="product-category" name="product-category">
-                                    <option value="computerAccessories">Computer & Accessories</option>
-                                    <option>Class, Training, or Workshop</option>
-                                    <option>Concert or Performance</option>
+                                <select class="form-select" id="product-category" name="category_id" required>
+                                    <option value="">{{ __('Select a category') }}</option>
+                                    @foreach($categories as $category)
+                                    <option value="{{ $category->id }}">{{ $category->title }}</option>
+                                    @endforeach
                                 </select>
+                                @error('category_id')
+                                <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                         </div>
                     </div>

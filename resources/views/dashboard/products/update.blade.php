@@ -72,6 +72,31 @@
                     @enderror
                 </div>
             </div>
+
+        </div>
+        <div class="col-lg-4 ps-lg-2">
+            <div class="sticky-sidebar">
+                <div class="card mb-3">
+                    <div class="card-header bg-body-tertiary">
+                        <h6 class="mb-0">Select category:</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="row gx-2">
+                            <div class="col-12 mb-3">
+                                <select class="form-select" id="product-category" name="category_id" required>
+                                    <option value="">{{ __('Select a category') }}</option>
+                                    @foreach($categories as $category)
+                                    <option value="{{ $category->id }}" {{ $product->category_id == $category->id ? 'selected' : '' }}>{{ $category->title }}</option>
+                                    @endforeach
+                                </select>
+                                @error('category_id')
+                                <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Rules\CategoryExists;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class ProductController
@@ -19,12 +21,14 @@ class ProductController
 
     public function create()
     {
-        return view('dashboard.products.create');
+        $categories = Category::all();
+        return view('dashboard.products.create', compact('categories'));
     }
 
     public function store(Request $request)
     {
         $data = $request->validate([
+            'category_id' => ['required', new CategoryExists],
             'title' => ['required', 'max:255'],
             'description' => 'required',
             'price' => ['required', 'numeric', 'max:999999.99'],
@@ -42,13 +46,16 @@ class ProductController
 
     public function edit(Product $product)
     {
-        return view('dashboard.products.update', compact('product'));
+        $categories = Category::all();
+        return view('dashboard.products.update', compact('product', 'categories'));
     }
+
 
 
     public function update(Request $request, Product $product)
     {
         $data = $request->validate([
+            'category_id' => ['required', new CategoryExists],
             'title' => ['required', 'max:255'],
             'description' => 'required',
             'price' => ['required', 'numeric', 'max:999999.99'],

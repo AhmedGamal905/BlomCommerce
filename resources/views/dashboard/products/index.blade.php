@@ -28,7 +28,7 @@
                     No image available
                     @endif
                 </td>
-                <td class="align-middle">{{ $product->category_id }}</td>
+                <td class="align-middle">{{ $product->category->title }}</td>
                 <td class="align-middle">{{ $product->title }}</td>
                 <td class="align-middle">${{ $product->price }}</td>
                 <td class="align-middle">{{ $product->created_at->format('j M Y, g:i a') }}</td>
