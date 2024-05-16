@@ -16,10 +16,11 @@ class EnsureAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (!Auth::guard('admin')->check()) {
+        if (! Auth::guard('admin')->check()) {
 
             return to_route('dashboard.login.form');
         }
+
         return $next($request);
     }
 }

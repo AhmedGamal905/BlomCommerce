@@ -95,13 +95,9 @@
                     <div class="navbar-vertical-content scrollbar">
                         <ul class="navbar-nav flex-column mb-3" id="navbarVerticalNav">
                             <li class="nav-item">
-                                <a class="nav-link dropdown-indicator" href="#e-commerce" role="button" data-bs-toggle="collapse" aria-expanded="true" aria-controls="e-commerce">
-                                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-shopping-cart"></span></span><span class="nav-link-text ps-1">E commerce</span>
-                                    </div>
-                                </a>
                                 <ul class="nav collapse show" id="e-commerce">
                                     <li class="nav-item"><a class="nav-link dropdown-indicator" href="#product" data-bs-toggle="collapse" aria-expanded="true" aria-controls="e-commerce">
-                                            <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Product options</span>
+                                            <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Categories</span>
                                             </div>
                                         </a>
                                         <ul class="nav collapse show" id="product">
@@ -110,37 +106,15 @@
                                                     </div>
                                                 </a>
                                             </li>
-                                            <li class="nav-item"><a class="nav-link" href="{{ route('dashboard.products.index') }}">
-                                                    <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Product list</span>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <li class="nav-item"><a class="nav-link " href="{{ route('dashboard.products.create') }}">
-                                                    <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Add product</span>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li class="nav-item"><a class="nav-link dropdown-indicator" href="#orders" data-bs-toggle="collapse" aria-expanded="false" aria-controls="e-commerce">
-                                            <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Orders</span>
-                                            </div>
-                                        </a>
-                                        <ul class="nav collapse" id="orders">
-                                            <li class="nav-item"><a class="nav-link" href="{{ asset('dashboard/public/app/e-commerce/orders/order-list.html') }}">
-                                                    <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Order list</span>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <li class="nav-item"><a class="nav-link" href="{{ asset('dashboard/public/app/e-commerce/orders/order-details.html') }}">
-                                                    <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Order details</span>
-                                                    </div>
-                                                </a>
-                                            </li>
                                         </ul>
                                     </li>
                                     <li class="nav-item"><a class="nav-link" href="{{ asset('dashboard/public/app/e-commerce/orders/order-details.html') }}">
-                                            <div class="d-flex align-items-center"><span class="nav-link-text ps-1">User</span>
+                                            <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Basket</span>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item"><a class="nav-link" href="{{ asset('dashboard/public/app/e-commerce/orders/order-details.html') }}">
+                                            <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Orders</span>
                                             </div>
                                         </a>
                                     </li>
@@ -174,16 +148,32 @@
                     </ul>
                     <ul class="navbar-nav navbar-nav-icons ms-auto flex-row align-items-center">
                         <li class="nav-item ps-2 pe-0">
-                            <div class="dropdown theme-control-dropdown"><a class="nav-link d-flex align-items-center dropdown-toggle fa-icon-wait fs-9 pe-1 py-0" href="#" role="button" id="themeSwitchDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="fas fa-sun fs-7" data-fa-transform="shrink-2" data-theme-dropdown-toggle-icon="light"></span><span class="fas fa-moon fs-7" data-fa-transform="shrink-3" data-theme-dropdown-toggle-icon="dark"></span><span class="fas fa-adjust fs-7" data-fa-transform="shrink-2" data-theme-dropdown-toggle-icon="auto"></span></a>
+                            <div class="dropdown theme-control-dropdown">
+                                <a class="nav-link d-flex align-items-center dropdown-toggle fa-icon-wait fs-9 pe-1 py-0" href="#" role="button" id="themeSwitchDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span class="fas fa-sun fs-7" data-fa-transform="shrink-2" data-theme-dropdown-toggle-icon="light"></span>
+                                    <span class="fas fa-moon fs-7" data-fa-transform="shrink-3" data-theme-dropdown-toggle-icon="dark"></span>
+                                    <span class="fas fa-adjust fs-7" data-fa-transform="shrink-2" data-theme-dropdown-toggle-icon="auto"></span>
+                                </a>
                                 <div class="dropdown-menu dropdown-menu-end dropdown-caret border py-0 mt-3" aria-labelledby="themeSwitchDropdown">
                                     <div class="bg-white dark__bg-1000 rounded-2 py-2">
-                                        <button class="dropdown-item d-flex align-items-center gap-2" type="button" value="light" data-theme-control="theme"><span class="fas fa-sun"></span>Light<span class="fas fa-check dropdown-check-icon ms-auto text-600"></span></button>
-                                        <button class="dropdown-item d-flex align-items-center gap-2" type="button" value="dark" data-theme-control="theme"><span class="fas fa-moon" data-fa-transform=""></span>Dark<span class="fas fa-check dropdown-check-icon ms-auto text-600"></span></button>
-                                        <button class="dropdown-item d-flex align-items-center gap-2" type="button" value="auto" data-theme-control="theme"><span class="fas fa-adjust" data-fa-transform=""></span>Auto<span class="fas fa-check dropdown-check-icon ms-auto text-600"></span></button>
+                                        <button class="dropdown-item d-flex align-items-center gap-2" type="button" value="light" data-theme-control="theme">
+                                            <span class="fas fa-sun"></span> Light
+                                            <span class="fas fa-check dropdown-check-icon ms-auto text-600"></span>
+                                        </button>
+                                        <button class="dropdown-item d-flex align-items-center gap-2" type="button" value="dark" data-theme-control="theme">
+                                            <span class="fas fa-moon" data-fa-transform=""></span> Dark
+                                            <span class="fas fa-check dropdown-check-icon ms-auto text-600"></span>
+                                        </button>
+                                        <button class="dropdown-item d-flex align-items-center gap-2" type="button" value="auto" data-theme-control="theme">
+                                            <span class="fas fa-adjust" data-fa-transform=""></span> Auto
+                                            <span class="fas fa-check dropdown-check-icon ms-auto text-600"></span>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
                         </li>
+                        @if (Route::has('login'))
+                        @auth
                         <li class="nav-item dropdown">
                             <a class="nav-link pe-0 ps-2" id="navbarDropdownUser" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <div class="avatar avatar-xl">
@@ -192,14 +182,34 @@
                             </a>
                             <div class="dropdown-menu dropdown-caret dropdown-caret dropdown-menu-end py-0" aria-labelledby="navbarDropdownUser">
                                 <div class="bg-white dark__bg-1000 rounded-2 py-2">
-                                    <form method="POST" action="{{ route('dashboard.logout') }}">
+                                    <form method="get" action="{{ route('profile.edit') }}">
+                                        @csrf
+                                        <button type="submit" class="dropdown-item">Profile</button>
+                                    </form>
+                                </div>
+                                <div class="bg-white dark__bg-1000 rounded-2 py-2">
+                                    <form method="post" action="{{ route('logout') }}">
                                         @csrf
                                         <button type="submit" class="dropdown-item">Logout</button>
                                     </form>
                                 </div>
                             </div>
                         </li>
-
+                        @else
+                        <li>
+                            <div class="d-flex">
+                                <form action="{{ route('login') }}" method="GET">
+                                    <button class="btn btn-primary me-1 mb-1" type="submit">Login</button>
+                                </form>
+                                @if (Route::has('register'))
+                                <form action="{{ route('register') }}" method="GET">
+                                    <button class="btn btn-success me-1 mb-1" type="submit">Register</button>
+                                </form>
+                                @endif
+                            </div>
+                        </li>
+                        @endauth
+                        @endif
                     </ul>
                 </nav>
 

@@ -2,39 +2,39 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Product;
 use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Http\Request;
-use App\Rules\CategoryExists;
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class ProductController
 {
     public function index()
     {
         $products = Product::query()
+            ->with(['category', 'media'])
             ->latest()
             ->paginate();
+
         return view('dashboard.products.index', compact('products'));
     }
-
-
     public function create()
     {
         $categories = Category::all();
+
         return view('dashboard.products.create', compact('categories'));
     }
 
     public function store(Request $request)
     {
         $data = $request->validate([
-            'category_id' => ['required', new CategoryExists],
+            'category_id' => ['required', 'exists:categories,id'],
             'title' => ['required', 'max:255'],
             'description' => 'required',
             'price' => ['required', 'numeric', 'max:999999.99'],
             'images' => ['required', 'array', 'max:5'],
             'images.*' => ['image', 'mimes:jpeg,png,jpg', 'max:2048'],
         ]);
+
         $product = Product::create($data);
 
         foreach ($request->file('images') as $image) {
@@ -47,20 +47,20 @@ class ProductController
     public function edit(Product $product)
     {
         $categories = Category::all();
+
         return view('dashboard.products.update', compact('product', 'categories'));
     }
-
-
 
     public function update(Request $request, Product $product)
     {
         $data = $request->validate([
-            'category_id' => ['required', new CategoryExists],
+            'category_id' => ['required', 'exists:categories,id'],
             'title' => ['required', 'max:255'],
             'description' => 'required',
             'price' => ['required', 'numeric', 'max:999999.99'],
             'images.*' => ['image', 'mimes:jpeg,png,jpg', 'max:2048'],
         ]);
+
         $afterUpdateCount = $product->getMedia('product_images')->count() -
             count($request->input('delete_images', [])) +
             ($request->hasFile('new_images') ? count($request->file('new_images')) : 0);
@@ -75,8 +75,9 @@ class ProductController
             });
         }
 
-        if ($request->hasFile('new_images')) {
-            $images = $request->file('new_images');
+        $images = $request->file('new_images', []);
+
+        if (count($images) > 0) {
             foreach ($images as $image) {
                 $product->addMedia($image)->toMediaCollection('product_images');
             }
@@ -89,10 +90,6 @@ class ProductController
 
     public function destroy(Product $product)
     {
-        $product->getMedia('product_images')->each(function (Media $media) {
-            $media->delete();
-        });
-
         $product->delete();
 
         return to_route('dashboard.products.index');

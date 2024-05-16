@@ -2,14 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
 class Admin extends Authenticatable
 {
     use Notifiable;
-
-    protected $guard = "admin";
 
     protected $fillable = [
         'name',
@@ -20,4 +18,16 @@ class Admin extends Authenticatable
     protected $hidden = [
         'password',
     ];
+
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'password' => 'hashed',
+        ];
+    }
 }
