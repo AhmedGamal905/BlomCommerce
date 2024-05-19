@@ -32,6 +32,7 @@
     <!-- ===============================================-->
     <link href="{{ asset('dashboard/public/vendors/choices/choices.min.css') }}" rel="stylesheet">
     <link href="{{ asset('dashboard/public/vendors/flatpickr/flatpickr.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('dashboard/public/vendors/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
     <link href="{{ asset('dashboard/public/vendors/dropzone/dropzone.css') }}" rel="stylesheet">
     <link href="{{ asset('dashboard/public/vendors/simplebar/simplebar.min.css') }}" rel="stylesheet">
     <link href="{{ asset('dashboard/public/assets/css/theme-rtl.css') }}" rel="stylesheet" id="style-rtl">
@@ -86,7 +87,7 @@
 
                         <button class="btn navbar-toggler-humburger-icon navbar-vertical-toggle" data-bs-toggle="tooltip" data-bs-placement="left" title="Toggle Navigation"><span class="navbar-toggle-icon"><span class="toggle-line"></span></span></button>
 
-                    </div><a class="navbar-brand" href="{{ route('dashboard.welcome') }}">
+                    </div><a class="navbar-brand" href="{{ route('home') }}">
                         <div class="d-flex align-items-center py-3"><img class="me-2" src="{{ asset('dashboard/public/assets/img/icons/spot-illustrations/falcon.png') }}" alt="" width="40" /><span class="font-sans-serif text-primary">falcon</span>
                         </div>
                     </a>
@@ -100,16 +101,20 @@
                                             <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Categories</span>
                                             </div>
                                         </a>
+                                        @forelse ($categories as $category)
                                         <ul class="nav collapse show" id="product">
-                                            <li class="nav-item"><a class="nav-link" href="{{ route('dashboard.categories.index') }}">
-                                                    <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Categories</span>
+                                            <li class="nav-item"><a class="nav-link" href="{{ route('category.products', $category) }}">
+                                                    <div class="d-flex align-items-center"><span class="nav-link-text ps-1">{{$category->title}}</span>
                                                     </div>
                                                 </a>
                                             </li>
                                         </ul>
+                                        @empty
+                                        <p>No categories found.</p>
+                                        @endforelse
                                     </li>
-                                    <li class="nav-item"><a class="nav-link" href="{{ asset('dashboard/public/app/e-commerce/orders/order-details.html') }}">
-                                            <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Basket</span>
+                                    <li class="nav-item"><a class="nav-link" href="{{ route('cart.show')}}">
+                                            <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Cart</span>
                                             </div>
                                         </a>
                                     </li>
@@ -213,6 +218,17 @@
                     </ul>
                 </nav>
 
+                @if (session()->has('success'))
+                <div class="alert alert-success" role="alert">
+                    {{ session('success') }}
+                </div>
+                @endif
+                @if (session()->has('error'))
+                <div class="alert alert-danger" role="alert">
+                    {{ session('error') }}
+                </div>
+                @endif
+
                 @yield('content')
 
                 <footer class="footer">
@@ -242,6 +258,7 @@
     <script src="{{ asset('dashboard/public/vendors/tinymce/tinymce.min.js') }}"></script>
     <script src="{{ asset('dashboard/public/vendors/choices/choices.min.js') }}"></script>
     <script src="{{ asset('dashboard/public/vendors/flatpickr/flatpickr.min.js') }}"></script>
+    <script src="{{ asset('dashboard/public/vendors/swiper/swiper-bundle.min.js') }}"></script>
     <script src="{{ asset('dashboard/public/vendors/dropzone/dropzone-min.js') }}"></script>
     <script src="{{ asset('dashboard/public/vendors/fontawesome/all.min.js') }}"></script>
     <script src="{{ asset('dashboard/public/vendors/lodash/lodash.min.js') }}"></script>

@@ -32,8 +32,10 @@ class ProductController
             'description' => 'required',
             'price' => ['required', 'numeric', 'max:999999.99'],
             'images' => ['required', 'array', 'max:5'],
-            'images.*' => ['image', 'mimes:jpeg,png,jpg', 'max:2048'],
+            'images.*' => ['image', 'max:2048'],
         ]);
+
+        unset($data['images']);
 
         $product = Product::create($data);
 
@@ -58,7 +60,7 @@ class ProductController
             'title' => ['required', 'max:255'],
             'description' => 'required',
             'price' => ['required', 'numeric', 'max:999999.99'],
-            'images.*' => ['image', 'mimes:jpeg,png,jpg', 'max:2048'],
+            'images.*' => ['image', 'max:2048'],
         ]);
 
         $afterUpdateCount = $product->getMedia('product_images')->count() -
@@ -70,9 +72,7 @@ class ProductController
         }
 
         if (isset($request->delete_images)) {
-            $product->getMedia('product_images')->whereIn('id', $request->delete_images)->each(function ($media) {
-                $media->delete();
-            });
+            $product->getMedia('product_images')->whereIn('id', $request->delete_images)->map->delete();
         }
 
         $images = $request->file('new_images', []);
@@ -82,6 +82,8 @@ class ProductController
                 $product->addMedia($image)->toMediaCollection('product_images');
             }
         }
+
+        unset($data['images']);
 
         $product->update($data);
 

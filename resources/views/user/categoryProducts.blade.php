@@ -20,12 +20,10 @@
                     </div>
                     <div class="p-3">
                         <h5 class="fs-9"><a class="text-1100" href="{{ route('product.details', $product) }}">{{ $product->title }}</a></h5>
-                        <p class="fs-10 mb-3">{{ $product->category->title }}</p>
-                        <h5 class="fs-md-7 text-warning mb-0 d-flex align-items-center mb-3"> ${{ $product->price}}
+                        <h5 class="fs-md-7 text-warning mb-0 d-flex align-items-center mb-3"> ${{ $product->price }}
                         </h5>
                         <p class="fs-10 mb-1">Shipping Cost: <strong>Free</strong></p>
-                        <p class="fs-10 mb-1">Stock: <strong class="text-success">Available</strong>
-                        </p>
+                        <p class="fs-10 mb-1">Stock: <strong class="text-success">Available</strong></p>
                     </div>
                     <form action="{{ route('cart.add') }}" method="POST">
                         @csrf
@@ -49,7 +47,7 @@
                 </div>
             </div>
             @empty
-            <p>No products found.</p>
+            <p>No products found in this category.</p>
             @endforelse
         </div>
     </div>
