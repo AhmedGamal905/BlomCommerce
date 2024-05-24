@@ -101,7 +101,7 @@
                                             <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Categories</span>
                                             </div>
                                         </a>
-                                        @forelse ($categories as $category)
+                                        @forelse ($shareCategories as $category)
                                         <ul class="nav collapse show" id="product">
                                             <li class="nav-item"><a class="nav-link" href="{{ route('category.products', $category) }}">
                                                     <div class="d-flex align-items-center"><span class="nav-link-text ps-1">{{$category->title}}</span>
@@ -118,7 +118,7 @@
                                             </div>
                                         </a>
                                     </li>
-                                    <li class="nav-item"><a class="nav-link" href="{{ asset('dashboard/public/app/e-commerce/orders/order-details.html') }}">
+                                    <li class="nav-item"><a class="nav-link" href="{{ route('order.history') }}">
                                             <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Orders</span>
                                             </div>
                                         </a>

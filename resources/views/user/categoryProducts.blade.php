@@ -25,7 +25,7 @@
                         <p class="fs-10 mb-1">Shipping Cost: <strong>Free</strong></p>
                         <p class="fs-10 mb-1">Stock: <strong class="text-success">Available</strong></p>
                     </div>
-                    <form action="{{ route('cart.add') }}" method="POST">
+                    <form action="{{ route('cart.store') }}" method="POST">
                         @csrf
                         <input type="hidden" name="product_id" value="{{$product->id}}">
                         <input type="hidden" name="quantity" value="1">

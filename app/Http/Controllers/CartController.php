@@ -3,24 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Traits\CartItems;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
-    public function showCart()
+    use CartItems;
+    public function show()
     {
-        $cartItems = collect(session('cart', []))->map(function ($quantity, $productId) {
-            return [
-                'product' => Product::findOrFail($productId),
-                'quantity' => $quantity
-            ];
-        });
+        $cartItems = $this->getCartItems();
 
         return view('user.cart', compact('cartItems'));
     }
 
 
-    public function addToCart(Request $request)
+
+    public function store(Request $request)
     {
         $request->validate([
             'product_id' => ['required'],
@@ -44,7 +42,7 @@ class CartController extends Controller
         return back();
     }
 
-    public function deleteFromCart(Request $request)
+    public function destroy(Request $request)
     {
         $request->validate([
             'product_id' => ['required'],

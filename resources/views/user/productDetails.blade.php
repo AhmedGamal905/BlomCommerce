@@ -34,7 +34,7 @@
                    <h4 class="d-flex align-items-center">${{$product->price}}</h4>
                    <p class="fs-10 mb-1"> <span>Shipping Cost: </span><strong>Free</strong></p>
                    <p class="fs-10">Stock: <strong class="text-success">Available</strong></p>
-                   <form action="{{ route('cart.add') }}" method="POST">
+                   <form action="{{ route('cart.store') }}" method="POST">
                        @csrf
                        <div class="row">
                            <div class="col-auto pe-0">

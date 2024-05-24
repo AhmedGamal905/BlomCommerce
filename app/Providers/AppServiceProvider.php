@@ -26,6 +26,8 @@ class AppServiceProvider extends ServiceProvider
     {
         Model::shouldBeStrict(App::isLocal());
         Paginator::useBootstrap();
-        View::share('categories', Category::all());
+        view()->composer('*', function ($view) {
+            $view->with('shareCategories', Category::all());
+        });
     }
 }
