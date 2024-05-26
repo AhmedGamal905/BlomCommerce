@@ -1,8 +1,9 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
+use App\Enums\OrderStatus;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 return new class extends Migration
 {
@@ -23,7 +24,7 @@ return new class extends Migration
             $table->string('phone')->nullable();
             $table->double('total')->default(0.00);
             $table->string('payment_gateway')->default('cash');
-            $table->string('status')->default('processing');
+            $table->string('status')->default(OrderStatus::PROCESSING);
             $table->timestamps();
         });
     }

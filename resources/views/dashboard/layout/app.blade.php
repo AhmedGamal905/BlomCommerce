@@ -122,22 +122,10 @@
                                             </li>
                                         </ul>
                                     </li>
-                                    <li class="nav-item"><a class="nav-link dropdown-indicator" href="#orders" data-bs-toggle="collapse" aria-expanded="false" aria-controls="e-commerce">
+                                    <li class="nav-item"><a class="nav-link" href="{{ route('dashboard.order.index') }}">
                                             <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Orders</span>
                                             </div>
                                         </a>
-                                        <ul class="nav collapse" id="orders">
-                                            <li class="nav-item"><a class="nav-link" href="{{ asset('dashboard/public/app/e-commerce/orders/order-list.html') }}">
-                                                    <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Order list</span>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <li class="nav-item"><a class="nav-link" href="{{ asset('dashboard/public/app/e-commerce/orders/order-details.html') }}">
-                                                    <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Order details</span>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                        </ul>
                                     </li>
                                     <li class="nav-item"><a class="nav-link" href="{{ asset('dashboard/public/app/e-commerce/orders/order-details.html') }}">
                                             <div class="d-flex align-items-center"><span class="nav-link-text ps-1">User</span>
