@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-    public function displayLogin()
+    public function show()
     {
         return view('admin.login');
     }
@@ -20,7 +20,7 @@ class AuthController extends Controller
             'password' => ['required', 'min:6'],
         ]);
 
-        if (!Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password])) {
+        if (! Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password])) {
             return back()->withErrors([
                 'email' => 'The email must be a valid email address.',
             ]);

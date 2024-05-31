@@ -87,7 +87,7 @@
 
                         <button class="btn navbar-toggler-humburger-icon navbar-vertical-toggle" data-bs-toggle="tooltip" data-bs-placement="left" title="Toggle Navigation"><span class="navbar-toggle-icon"><span class="toggle-line"></span></span></button>
 
-                    </div><a class="navbar-brand" href="{{ route('home') }}">
+                    </div><a class="navbar-brand" href="{{ route('products.index') }}">
                         <div class="d-flex align-items-center py-3"><img class="me-2" src="{{ asset('dashboard/public/assets/img/icons/spot-illustrations/falcon.png') }}" alt="" width="40" /><span class="font-sans-serif text-primary">falcon</span>
                         </div>
                     </a>
@@ -103,7 +103,7 @@
                                         </a>
                                         @forelse ($shareCategories as $category)
                                         <ul class="nav collapse show" id="product">
-                                            <li class="nav-item"><a class="nav-link" href="{{ route('category.products', $category) }}">
+                                            <li class="nav-item"><a class="nav-link" href="{{ route('products.index', ['category_id' => $category->id]) }}">
                                                     <div class="d-flex align-items-center"><span class="nav-link-text ps-1">{{$category->title}}</span>
                                                     </div>
                                                 </a>
@@ -118,7 +118,7 @@
                                             </div>
                                         </a>
                                     </li>
-                                    <li class="nav-item"><a class="nav-link" href="{{ route('order.history') }}">
+                                    <li class="nav-item"><a class="nav-link" href="{{ route('orders.index') }}">
                                             <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Orders</span>
                                             </div>
                                         </a>

@@ -17,6 +17,7 @@ class ProductController
 
         return view('dashboard.products.index', compact('products'));
     }
+
     public function create()
     {
         $categories = Category::all();

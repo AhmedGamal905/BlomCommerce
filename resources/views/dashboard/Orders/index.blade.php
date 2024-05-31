@@ -33,9 +33,9 @@
                 <td class="align-middle">${{ $order->total }}</td>
                 <td class="align-middle">{{ $order->status }}</td>
                 <td class="align-middle">
-                    <form method="GET" action="{{Route('dashboard.order.show', $order)}}">
-                        <button class="btn btn-outline-info me-1 mb-1" type="submit">Details</button>
-                    </form>
+                    <a href="{{ route('dashboard.orders.show', $order) }}" class="btn btn-outline-info me-1 mb-1">
+                      Details
+                    </a>
                 </td>
             </tr>
             @empty

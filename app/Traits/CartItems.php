@@ -5,7 +5,6 @@ namespace App\Traits;
 use App\Models\Product;
 use Illuminate\Support\Collection;
 
-
 trait CartItems
 {
     protected function getCartItems(): Collection
@@ -16,6 +15,7 @@ trait CartItems
 
         return $cart->map(function ($quantity, $productId) use ($products) {
             $product = $products->where('id', $productId)->first();
+
             return [
                 'product' => $product,
                 'quantity' => $quantity,

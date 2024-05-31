@@ -15,24 +15,24 @@
             </tr>
         </thead>
         <tbody id="bulk-select-body">
-            @foreach ($products as $product)
+            @foreach ($order->products as $product)
             <tr>
                 <td class="white-space-nowrap"></td>
-                <td class="align-middle">{{ $product['product']->id }}</td>
+                <td class="align-middle">{{ $product->id }}</td>
                 <td class="align-middle">
-                    @if ($product['product']->getFirstMedia('product_images'))
-                    <img src="{{ $product['product']->getFirstMedia('product_images')->getUrl() }}" alt="{{ $product['product']->title }}" width="75">
+                    @if ($product->getFirstMedia('product_images'))
+                    <img src="{{ $product->getFirstMedia('product_images')->getUrl() }}" alt="{{ $product->title }}" width="75">
                     @else
                     No image available
                     @endif
                 </td>
-                <td class="align-middle">{{ $product['product']->title }}</td>
-                <td class="align-middle">${{ $product['product']->price }}</td>
-                <td class="align-middle">{{ $product['quantity'] }}</td>
+                <td class="align-middle">{{ $product->title }}</td>
+                <td class="align-middle">${{ $product->price }}</td>
+                <td class="align-middle">{{ $product->pivot->quantity }}</td>
                 <td class="align-middle">
-                    <form method="GET" action="{{ route('product.details', $product) }}">
-                        <button class="btn btn-outline-info me-1 mb-1" type="submit">Details</button>
-                    </form>
+                    <a href="{{ route('products.show', $product) }}" class="btn btn-outline-info me-1 mb-1">
+                        Show
+                    </a>
                 </td>
             </tr>
             @endforeach

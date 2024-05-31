@@ -22,7 +22,7 @@
                 <td class="align-middle">${{ $order->total }}</td>
                 <td class="align-middle">{{ $order->status }}</td>
                 <td class="align-middle">
-                    <form method="GET" action="{{Route('order.show', $order)}}">
+                    <form method="GET" action="{{Route('orders.show', $order)}}">
                         <button class="btn btn-outline-info me-1 mb-1" type="submit">Details</button>
                     </form>
                 </td>

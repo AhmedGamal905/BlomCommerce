@@ -23,9 +23,9 @@
         <div class="row gx-x1 mx-0 align-items-center border-bottom border-200">
             <div class="col-8 py-3 px-x1">
                 @if ($item['product']->getFirstMedia('product_images'))
-                <div class="d-flex align-items-center"><a href="{{ route('product.details', $item['product']) }}"><img class="img-fluid rounded-1 me-3 d-none d-md-block" src="{{ $item['product']->getFirstMedia('product_images')->getUrl() }}" alt="{{ $item['product']->title }}" width="60" /></a>
+                <div class="d-flex align-items-center"><a href="{{ route('products.show', $item['product']) }}"><img class="img-fluid rounded-1 me-3 d-none d-md-block" src="{{ $item['product']->getFirstMedia('product_images')->getUrl() }}" alt="{{ $item['product']->title }}" width="60" /></a>
                     <div class="flex-1">
-                        <h5 class="fs-9"><a class="text-900" href="{{ route('product.details', $item['product']) }}">{{ $item['product']->title }}</a></h5>
+                        <h5 class="fs-9"><a class="text-900" href="{{ route('products.show', $item['product']) }}">{{ $item['product']->title }}</a></h5>
                         <form action="{{ route('cart.destroy') }}" method="POST">
                             @csrf
                             <input type="hidden" name="product_id" value="{{$item['product']->id}}">

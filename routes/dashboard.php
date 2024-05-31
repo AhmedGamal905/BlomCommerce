@@ -1,23 +1,26 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductController;
-use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\UserController;
+use Illuminate\Support\Facades\Route;
 
 Route::middleware('admin')->get('/', function () {
     return view('dashboard.welcome');
 })->name('welcome');
 
-Route::get('/login', [AuthController::class, 'displayLogin'])->name('login.index');
-Route::post('/login', [AuthController::class, 'login'])->name('login.post');
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::controller(AuthController::class)->group(function () {
+    Route::get('/login', 'show')->name('login.index');
+    Route::post('/login', 'login')->name('login.post');
+    Route::post('/logout', 'logout')->name('logout');
+});
 
 Route::middleware('admin')->resource('/products', ProductController::class)->except('show');
+
 Route::middleware('admin')->resource('/categories', CategoryController::class)->except(['show', 'create']);
 
-Route::middleware('admin')->group(function () {
-    Route::get('/orders', [OrderController::class, 'index'])->name('order.index');
-    Route::get('/orders/{order}', [OrderController::class, 'show'])->name('order.show');
-});
+Route::middleware('admin')->get('/users', [UserController::class, 'index'])->name('users.index');
+
+Route::resource('orders', OrderController::class)->only(['index', 'show', 'update'])->middleware('admin');

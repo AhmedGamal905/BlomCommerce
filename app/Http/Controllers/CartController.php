@@ -9,14 +9,13 @@ use Illuminate\Http\Request;
 class CartController extends Controller
 {
     use CartItems;
+
     public function show()
     {
         $cartItems = $this->getCartItems();
 
         return view('user.cart', compact('cartItems'));
     }
-
-
 
     public function store(Request $request)
     {
@@ -53,8 +52,11 @@ class CartController extends Controller
         $cart = session()->get('cart', []);
 
         if (isset($cart[$product->id])) {
+
             unset($cart[$product->id]);
+
             session()->put('cart', $cart);
+
             session()->flash('success', 'Product removed from cart successfully!');
         } else {
             session()->flash('error', 'Product not found in cart!');

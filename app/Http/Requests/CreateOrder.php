@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\Traits\CartItems;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CreateOrder extends FormRequest

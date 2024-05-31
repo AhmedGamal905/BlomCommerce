@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Order;
-use App\Models\Product;
-use App\Models\OrderProduct;
-use Illuminate\Http\Request;
+use App\Enums\OrderStatus;
 use App\Http\Controllers\Controller;
+use App\Models\Order;
+use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class OrderController extends Controller
 {
-
     public function index()
     {
         $orders = Order::query()
@@ -22,20 +21,23 @@ class OrderController extends Controller
 
     public function show(Order $order)
     {
-        $orderProducts = OrderProduct::where('order_id', $order->id)->get();
-        $products = [];
+        $order->load(['products' => ['media']]);
 
-        foreach ($orderProducts as $orderProduct) {
-            $product = Product::find($orderProduct->product_id);
-            $products[] = [
-                'product' => $product,
-                'quantity' => $orderProduct->quantity,
-            ];
-        }
-        return view('dashboard.orders.details', compact('products'));
+        $statuses = OrderStatus::cases();
+
+        return view('dashboard.orders.show', compact('order', 'statuses'));
     }
 
-    public function update(Request $request, string $id)
+    public function update(Request $request, Order $order)
     {
+        $data = $request->validate([
+            'status' => ['required', Rule::enum(OrderStatus::class)],
+        ]);
+
+        $order->update($data);
+
+        session()->flash('success', 'Order status updated successfully!');
+
+        return to_route('dashboard.orders.show', $order);
     }
 }

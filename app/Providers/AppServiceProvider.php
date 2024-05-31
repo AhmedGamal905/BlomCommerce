@@ -3,11 +3,10 @@
 namespace App\Providers;
 
 use App\Models\Category;
-use Illuminate\Support\Facades\App;
-use Illuminate\Pagination\Paginator;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\View;
 
 class AppServiceProvider extends ServiceProvider
 {

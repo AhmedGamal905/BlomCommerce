@@ -1,21 +1,14 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckOutController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\Route;
 
-Route::get('/', [ProductController::class, 'index'])->name('home');
-
-Route::get('/category/{category}', [ProductController::class, 'categoryProducts'])->name('category.products');
-Route::get('/product/{product}', [ProductController::class, 'details'])->name('product.details');
-
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
+Route::get('/', [ProductController::class, 'index'])->name('products.index');
+Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');
 
 Route::controller(CartController::class)->prefix('cart')->name('cart.')->group(function () {
     Route::get('/', 'show')->name('show');
@@ -24,12 +17,18 @@ Route::controller(CartController::class)->prefix('cart')->name('cart.')->group(f
 });
 
 Route::middleware('auth')->group(function () {
-    Route::get('/checkout', [OrderController::class, 'index'])->name('checkout.index');
-    Route::post('/checkout', [OrderController::class, 'store'])->name('checkout.store');
-    Route::get('/orders', [OrderController::class, 'history'])->name('order.history');
-    Route::get('/orders/{order}', [OrderController::class, 'show'])->name('order.show');
+    Route::controller(CheckOutController::class)->prefix('checkout')->name('checkout.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::post('/', 'store')->name('store');
+    });
+
+    Route::resource('orders', OrderController::class)->only(['index', 'show']);
+
+    Route::controller(ProfileController::class)->name('profile.')->group(function () {
+        Route::get('/profile', 'edit')->name('edit');
+        Route::patch('/profile', 'update')->name('update');
+        Route::delete('/profile', 'destroy')->name('destroy');
+    });
 });
-
-
 
 require __DIR__ . '/auth.php';

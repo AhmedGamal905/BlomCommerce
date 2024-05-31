@@ -122,13 +122,13 @@
                                             </li>
                                         </ul>
                                     </li>
-                                    <li class="nav-item"><a class="nav-link" href="{{ route('dashboard.order.index') }}">
+                                    <li class="nav-item"><a class="nav-link" href="{{ route('dashboard.orders.index') }}">
                                             <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Orders</span>
                                             </div>
                                         </a>
                                     </li>
-                                    <li class="nav-item"><a class="nav-link" href="{{ asset('dashboard/public/app/e-commerce/orders/order-details.html') }}">
-                                            <div class="d-flex align-items-center"><span class="nav-link-text ps-1">User</span>
+                                    <li class="nav-item"><a class="nav-link" href="{{ route('dashboard.users.index') }}">
+                                            <div class="d-flex align-items-center"><span class="nav-link-text ps-1">users</span>
                                             </div>
                                         </a>
                                     </li>
@@ -190,6 +190,17 @@
 
                     </ul>
                 </nav>
+
+                @if (session()->has('success'))
+                <div class="alert alert-success" role="alert">
+                    {{ session('success') }}
+                </div>
+                @endif
+                @if (session()->has('error'))
+                <div class="alert alert-danger" role="alert">
+                    {{ session('error') }}
+                </div>
+                @endif
 
                 @yield('content')
 
