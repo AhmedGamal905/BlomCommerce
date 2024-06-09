@@ -23,4 +23,4 @@ Route::middleware('admin')->resource('/categories', CategoryController::class)->
 
 Route::middleware('admin')->get('/users', [UserController::class, 'index'])->name('users.index');
 
-Route::resource('orders', OrderController::class)->only(['index', 'show', 'update'])->middleware('admin');
+Route::middleware('admin')->resource('orders', OrderController::class)->only(['index', 'show', 'update']);
