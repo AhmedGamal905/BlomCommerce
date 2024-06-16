@@ -29,7 +29,7 @@ class ProductFactory extends Factory
     {
         return $this->afterCreating(function (Product $product) {
 
-            $product->addMediaFromUrl('https://www.larazawestern.com/wp-content/uploads/89mon-1-scaled-e1681432403123-768x768.jpg')
+            $product->addMediaFromUrl('https://i.pinimg.com/736x/ff/75/ed/ff75ed2ad083dd5b5d37f6cfa66b9b2f.jpg')
                 ->toMediaCollection('product_images');
         });
     }

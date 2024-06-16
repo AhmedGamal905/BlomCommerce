@@ -7,7 +7,6 @@ use App\Models\Admin;
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 
